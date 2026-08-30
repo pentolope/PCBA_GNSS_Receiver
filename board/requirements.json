@@ -25,6 +25,7 @@
   "derivation": {
     "method": "BRIEF.md was read and split; no design decision was taken. Every fixed_requirements entry, and every spec-table row sourced from the brief, carries a quotation that was checked by literal substring match against the brief bytes digested above. The build refuses to emit this file if any quotation is not found.",
     "quotations_verified": 22,
+    "where_the_quotations_are": "Every one of them is in this file: fixed_requirements[].brief_evidence and brief_spec_rows[].brief_evidence. The count above is the sum of those two lists, so it is recomputable from this repository alone - re-read BRIEF.md and check each string is a substring of it. brief_spec_rows carries the quotations behind the README's spec table, which would otherwise cite the brief with the evidence left in a build script.",
     "review": "two rounds of adversarial review against the brief, looking for invented requirements, lost requirements, evidence supporting a weaker claim than the one made beside it, and worksheet questions that presuppose their own answer"
   },
   "fixed_requirements": [
@@ -97,6 +98,48 @@
       "id": "REQ-14",
       "requirement": "Keep this repository a consumer of the shared PCBA_AutoDesignAndTest toolkit; board-specific logic must not accumulate in the toolkit.",
       "brief_evidence": "The repository should remain a consumer of the shared `PCBA_AutoDesignAndTest` toolkit rather than accumulating board-specific logic in the toolkit."
+    }
+  ],
+  "brief_spec_rows": [
+    {
+      "aspect": "Board function",
+      "value": "GNSS receiver board",
+      "brief_evidence": "Create a GNSS receiver board with an external active-antenna connector"
+    },
+    {
+      "aspect": "Antenna interface",
+      "value": "External active-antenna connector, with ESD protection and a bias feed",
+      "brief_evidence": "external active-antenna connector, ESD protection, bias feed, SAW/filtering"
+    },
+    {
+      "aspect": "RF front end",
+      "value": "SAW/filtering and low-noise amplification, scoped to whatever the selected GNSS module/IC needs",
+      "brief_evidence": "SAW/filtering and low-noise amplification as appropriate to the selected GNSS module/IC"
+    },
+    {
+      "aspect": "Host / data interfaces",
+      "value": "USB-C and UART output",
+      "brief_evidence": "Provide USB-C and UART output, backup supply for ephemeris/RTC retention"
+    },
+    {
+      "aspect": "Backup supply",
+      "value": "Backup supply for ephemeris/RTC retention",
+      "brief_evidence": "Provide USB-C and UART output, backup supply for ephemeris/RTC retention, and status timing output."
+    },
+    {
+      "aspect": "Timing output",
+      "value": "Status timing output",
+      "brief_evidence": "backup supply for ephemeris/RTC retention, and status timing output."
+    },
+    {
+      "aspect": "RF path constraint",
+      "value": "Antenna-to-receiver path must be short, impedance controlled, and isolated from digital clocks and switching regulators",
+      "brief_evidence": "The RF path from antenna to receiver must be short, impedance controlled, and isolated from digital clocks and switching regulators."
+    },
+    {
+      "aspect": "Impedance named in the source",
+      "value": "50-ohm routing, named in the brief header's primary-stressor list (no tolerance, geometry or stackup stated anywhere)",
+      "brief_evidence": "**Primary stressors:** GNSS RF chain, 50-ohm routing, LNA/filter, quiet supplies"
     }
   ],
   "open_decisions": [
